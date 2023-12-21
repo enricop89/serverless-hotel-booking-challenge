@@ -10,7 +10,7 @@ The Hotel Reservation System is a serverless web platform designed for a hotel c
 
 The project leverages the Serverless Framework for AWS deployment. The configuration is split across different stages - development (dev) and production (prod) - to facilitate seamless development and deployment processes.
 
-#### serverless.yml Structure
+#### serverless.yml
 
 The serverless.yml file is the heart of the Serverless Framework configuration. It defines the AWS Lambda functions, the events that trigger them, and other AWS resources.
 
@@ -45,6 +45,24 @@ Configure the environment variables (like API endpoint) in Postman for your spec
 
 To get started with this project:
 
-Install the Serverless Framework and configure AWS credentials.
-Deploy the service using serverless deploy --stage dev for development or serverless deploy --stage prod for production.
-Use the Postman collection to test and interact with the API.
+- Install the Serverless Framework and configure AWS credentials.
+- Deploy the service using `serverless deploy --stage dev` for development or `serverless deploy --stage prod for production`.
+- Use the Postman collection to test and interact with the API.
+
+### CI/CD - AWS CodePipeline
+
+This project utilizes AWS CodePipeline for continuous integration and continuous deployment. 
+
+####  Pipeline Stages
+
+The CI/CD pipeline is composed of two main stages:
+
+Source Stage: This stage is triggered whenever there is a new commit in the Github repo, main branch.
+
+Build Stage: In this stage, AWS CodeBuild installs dependecies and deploy the code using serverless. I am using the `buildspec.yml` file to define actions. 
+
+![](./images/codepipeline.png)
+
+**Note**: in this case I don't need a deploy stage because I am deploying using Serverless Framework. 
+
+
