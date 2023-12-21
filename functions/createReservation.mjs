@@ -12,7 +12,6 @@ export const handler = async (event) => {
         }),
       };
     }
-    console.log("trigger push");
     const reservationId = await createReservation(data);
 
     return {

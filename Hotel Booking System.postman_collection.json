@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"hotelId\": \"HOTEL1\",\n    \"customerId\": \"CUSTOMER1\",\n    \"checkInDate\": \"2022-01-01\",\n    \"checkOutDate\": \"2022-01-05\"\n}",
+					"raw": "{\n    \"customerId\": \"Customer-Enrico-id-test\",\n    \"checkInDate\": \"2024-01-01\",\n    \"checkOutDate\": \"2024-01-05\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
