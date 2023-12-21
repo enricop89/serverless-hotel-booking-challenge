@@ -1,0 +1,17 @@
+{
+  "name": "hotel-booking-service",
+  "version": "1.0.0",
+  "description": "Serverless Hotel Reservations API",
+  "main": "index.js",
+  "scripts": {
+    "deploy-dev": "sls deploy --region eu-west-2 --stage dev --aws-profile deployer"
+  },
+  "author": "Enrico Portolan",
+  "license": "ISC",
+  "devDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.476.0"
+  },
+  "dependencies": {
+    "uuid": "^9.0.1"
+  }
+}

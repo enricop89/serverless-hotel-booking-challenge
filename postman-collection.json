@@ -1,0 +1,100 @@
+{
+  "info": {
+    "name": "Hotel Booking System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Reservation",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"hotelId\": \"HOTEL1\",\n    \"customerId\": \"CUSTOMER1\",\n    \"checkInDate\": \"2022-01-01\",\n    \"checkOutDate\": \"2022-01-05\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{apiUrl}}/reservations",
+          "host": ["{{apiUrl}}"],
+          "path": ["reservations"]
+        }
+      }
+    },
+    {
+      "name": "Get All Reservations for a Hotel",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{apiUrl}}/reservations/{{hotelId}}",
+          "host": ["{{apiUrl}}"],
+          "path": ["reservations", "{{hotelId}}"]
+        }
+      }
+    },
+    {
+      "name": "Get Single Reservation",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{apiUrl}}/reservations/{{hotelId}}/{{reservationId}}",
+          "host": ["{{apiUrl}}"],
+          "path": ["reservations", "{{hotelId}}", "{{reservationId}}"]
+        }
+      }
+    },
+    {
+      "name": "Update Reservation",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"checkInDate\": \"2022-01-02\",\n    \"checkOutDate\": \"2022-01-06\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{apiUrl}}/reservations/{{hotelId}}/{{reservationId}}",
+          "host": ["{{apiUrl}}"],
+          "path": ["reservations", "{{hotelId}}", "{{reservationId}}"]
+        }
+      }
+    },
+    {
+      "name": "Delete Reservation",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{apiUrl}}/reservations/{{hotelId}}/{{reservationId}}",
+          "host": ["{{apiUrl}}"],
+          "path": ["reservations", "{{hotelId}}", "{{reservationId}}"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "apiUrl",
+      "value": "https://<your-api-gateway-url>"
+    },
+    {
+      "key": "hotelId",
+      "value": "exampleHotelId"
+    },
+    {
+      "key": "reservationId",
+      "value": "exampleReservationId"
+    }
+  ]
+}

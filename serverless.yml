@@ -1,0 +1,86 @@
+service: hotel-booking-service
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'eu-west-2'}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:PutItem"
+        - "dynamodb:GetItem"
+        - "dynamodb:UpdateItem"
+        - "dynamodb:DeleteItem"
+        - "dynamodb:Query"
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.DYNAMODB_TABLE}"
+
+custom: ${file(./config/${self:provider.stage}.yml)}
+
+functions:
+  createReservation:
+    handler: functions/createReservation.handler
+    environment:
+      DYNAMODB_TABLE: ${self:custom.DYNAMODB_TABLE}
+      REGION: ${opt:region, 'eu-west-2'}
+    events:
+      - http:
+          path: reservations
+          method: post
+  getReservations:
+    handler: functions/getReservations.handler
+    environment:
+      DYNAMODB_TABLE: ${self:custom.DYNAMODB_TABLE}
+      REGION: ${opt:region, 'eu-west-2'}
+    events:
+      - http:
+          path: reservations
+          method: get
+
+  getReservation:
+    handler: functions/getReservation.handler
+    environment:
+      DYNAMODB_TABLE: ${self:custom.DYNAMODB_TABLE}
+      REGION: ${opt:region, 'eu-west-2'}
+    events:
+      - http:
+          path: reservations/{reservationId}
+          method: get
+
+  updateReservation:
+    handler: functions/updateReservation.handler
+    environment:
+      DYNAMODB_TABLE: ${self:custom.DYNAMODB_TABLE}
+      REGION: ${opt:region, 'eu-west-2'}
+    events:
+      - http:
+          path: reservations/{reservationId}
+          method: put
+
+  deleteReservation:
+    handler: functions/deleteReservation.handler
+    environment:
+      DYNAMODB_TABLE: ${self:custom.DYNAMODB_TABLE}
+      REGION: ${opt:region, 'eu-west-2'}
+    events:
+      - http:
+          path: reservations/{reservationId}
+          method: delete
+resources:
+  Resources:
+    HotelBookingTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: "PK"
+            AttributeType: "S"
+          - AttributeName: "SK"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "PK"
+            KeyType: "HASH"
+          - AttributeName: "SK"
+            KeyType: "RANGE"
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.DYNAMODB_TABLE}
