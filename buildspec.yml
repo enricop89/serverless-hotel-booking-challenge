@@ -16,7 +16,7 @@ phases:
   build:
     commands:
       - echo Deploying application
-      - serverless deploy --stage $STAGE_NAME
+      - serverless deploy --stage ${STAGE_NAME}
   post_build:
     commands:
       - echo Build and deployment completed.
