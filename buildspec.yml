@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo Installing Node.js dependencies
+      - npm install -g serverless
+      - npm install
+  # Not implemented for this project
+  # pre_build:
+  #   commands:
+  #     - echo Running tests...
+  #     - npm test
+  build:
+    commands:
+      - echo Deploying application
+      - serverless deploy --stage $STAGE_NAME
+  post_build:
+    commands:
+      - echo Build and deployment completed.
+
+cache:
+  paths:
+    - "node_modules/**/*"
